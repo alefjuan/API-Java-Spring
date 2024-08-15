@@ -2,7 +2,7 @@
 API feita em Java com Spring/SpringBoot contendo operações CRUD utilizando um Banco de Dados MySql.
 
 ### Regras utilizadas
-- Campos: Mátricula, Nome e Idade e Telefones ilimitados);
+- Campos: Mátricula, Nome e Idade(Aqui deveria ser sobrenome mas achei interessante um tipo int) e Telefones ilimitados;
 - Todos devem ser preenchidos para salvar;
 - Apenas Nome deve haver mais de três caracteres (Deixei mátricula como AutoIncrement);
 - Mátricula possuí verificação na base para ver se já existe, havendo falha neste caso;

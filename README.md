@@ -7,7 +7,7 @@ API feita em Java com Spring/SpringBoot contendo operações CRUD utilizando um 
 - Apenas Nome deve haver mais de três caracteres (Deixei mátricula como AutoIncrement);
 - Mátricula possuí verificação na base para ver se já existe, havendo falha neste caso;
 
-### Front
+### Frontend
 Em breve...
 
 ### Frameworks

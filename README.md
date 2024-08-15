@@ -14,7 +14,7 @@ Em breve...
 Uso de frameworks como Spring (spring jpa, spring boot, spring web)
 
 ### Testes
-Inserido alguns para questões voltadas a didática da ação
+Inserido alguns para questões voltadas a didática, porém em outra branch
 
 ### Deploy
 Em breve...

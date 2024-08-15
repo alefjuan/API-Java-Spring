@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="alunos")
@@ -12,10 +13,12 @@ public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int matricula; 
+    private int matricula; 
     private String nome;
     private int idade;
-
+    
+    @Column(columnDefinition = "TEXT") // Usar TEXT para MySQL
+    private String telefones; // Armazena os telefones como um texto JSON ou delimitado
 
     public int getMatricula() {
         return matricula;
@@ -38,4 +41,10 @@ public class Aluno {
         this.idade = idade;
     }
     
+    public String getTelefones() {
+        return telefones;
+    }
+    public void setTelefones(String telefones) {
+        this.telefones = telefones;
+    }
 }

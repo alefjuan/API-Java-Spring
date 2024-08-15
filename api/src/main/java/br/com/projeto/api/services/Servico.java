@@ -31,25 +31,25 @@ public class Servico {
             return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
         }
         
-        // Verificar se a matrícula é um número positivo
-        if (obj.getMatricula() <= 0) {
-            mensagem.setMensagem("Matrícula inválida! Deve ser um número positivo.");
-            return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
-        }
+        // Verificar se a matrícula é um número positivo, porém deixei com autoincrement, então sem necessidade
+        // if (obj.getMatricula() <= 0) {
+        //     mensagem.setMensagem("Matrícula inválida! Deve ser um número positivo.");
+        //     return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+        // }
     
         // Verificar se a matrícula não se repete na base manualmente, já que o método existsByMatricula(int) não está definido
         if (repositorio.findById(obj.getMatricula()).isPresent()) {
             mensagem.setMensagem("A matrícula já existe!");
             return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
         }
-    
-        // Se todas as verificações passarem, salvar o aluno
+        if (obj.getTelefones() != null && !obj.getTelefones().isEmpty()) {
+        }
         return new ResponseEntity<>(repositorio.save(obj), HttpStatus.CREATED);
     }
     
     
 
-    //método de seleção
+    //método de seleção de apresentar todos
     public ResponseEntity<?> selecionar()
     {
         return new ResponseEntity<>(repositorio.findAll(), HttpStatus.OK);
@@ -66,23 +66,33 @@ public class Servico {
     }
 
     //metodo para edição
-    public ResponseEntity<?> editar(Aluno obj){
-        if(repositorio.countByMatricula(obj.getMatricula())==0)
-        {
-            mensagem.setMensagem("Matricula não existe");
+    public ResponseEntity<?> editar(Aluno obj) {
+        // Verificar se a matrícula existe
+        if (repositorio.countByMatricula(obj.getMatricula()) == 0) {
+            mensagem.setMensagem("Matrícula não existe");
             return new ResponseEntity<>(mensagem, HttpStatus.NOT_FOUND);
-        }else if(obj.getNome().equals(""))
-            {
-                mensagem.setMensagem("Necessário informar nome");
-                return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
-            }else if(obj.getIdade()<=0)
-            {
-                mensagem.setMensagem("Informe uma idade Válida");
-                return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
-            }else{
-                return new ResponseEntity<>(repositorio.save(obj), HttpStatus.OK);
-            }
+        }
+        
+        // Verificar se o nome está preenchido
+        if (obj.getNome() == null || obj.getNome().isEmpty()) {
+            mensagem.setMensagem("Necessário informar nome");
+            return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+        }
+        
+        // Verificar se a idade é válida
+        if (obj.getIdade() <= 0) {
+            mensagem.setMensagem("Informe uma idade válida");
+            return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+        }
+        
+        // Verificar se o campo telefones está presente e validar o formato, se necessário
+        if (obj.getTelefones() != null && !obj.getTelefones().isEmpty()) {
+            
+        }
+        
+        return new ResponseEntity<>(repositorio.save(obj), HttpStatus.OK);
     }
+    
     //metodo de remoção
     public ResponseEntity<?> remover(int matricula)
     {
